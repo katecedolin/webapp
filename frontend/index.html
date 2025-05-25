@@ -1,0 +1,100 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Cardiovascular Disease Expert Chatbot</title>
+ <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ <div class="chat-container">
+   <header class="chat-header">
+     <img src="images/cvd-banner.jpg" alt="Cardiovascular Disease Logo" />
+     <h1>Ask a Cardiovascular Disease Expert</h1>
+   </header>
+   <div class="chat-window" id="chatWindow">
+     <div class="message bot">
+       Welcome! Ask me anything about cardiovascular disease.
+     </div>
+   </div>
+   <div class="chat-input">
+     <textarea id="promptA" placeholder="Type your question…"></textarea>
+     <button onclick="askA()">Send</button>
+   </div>
+ </div>
+
+
+<script>
+ async function askA() {
+   const inputEl = document.getElementById("promptA");
+   const prompt = inputEl.value.trim();
+   if (!prompt) return;
+
+
+   // Clear the box right away
+   inputEl.value = "";
+
+
+   const win = document.getElementById("chatWindow");
+
+
+   // Append user message
+   const userMsg = document.createElement("div");
+   userMsg.className = "message user";
+   userMsg.textContent = prompt;
+   win.appendChild(userMsg);
+   win.scrollTop = win.scrollHeight;
+
+
+   // Show typing indicator
+   const typing = document.createElement("div");
+   typing.className = "message bot typing";
+   typing.id = "typingIndicator";
+   typing.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+   win.appendChild(typing);
+   win.scrollTop = win.scrollHeight;
+
+
+   try {
+     const res = await fetch("/.netlify/functions/server/api/chat", {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({ prompt })
+     });
+     const raw = await res.text();
+     const text = JSON.parse(raw);
+
+
+
+
+     // Remove typing indicator
+     typing.remove();
+
+
+     // Append bot response
+     const botMsg = document.createElement("div");
+     botMsg.className = "message bot";
+     botMsg.textContent = text || "(no reply)";
+     win.appendChild(botMsg);
+   } catch (e) {
+     typing.remove();
+     const errMsg = document.createElement("div");
+     errMsg.className = "message bot";
+     errMsg.textContent = "Error: could not reach server.";
+     win.appendChild(errMsg);
+     console.error(e);
+   }
+
+
+   win.scrollTop = win.scrollHeight;
+ }
+</script>
+
+
+
+
+
+
+</body>
+</html>

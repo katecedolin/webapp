@@ -1,0 +1,208 @@
+/* style.css */
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+
+
+:root {
+--primary-color: #4A76A8;
+--secondary-color: #F1F0F0;
+--user-bg: #DCF8C6;
+--bot-bg: #FFFFFF;
+--font-family: 'Inter', sans-serif;
+}
+
+
+
+
+/* Reset & full‐screen */
+*, *::before, *::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+
+
+
+html, body {
+width: 100%;
+height: 100%;
+background-color: var(--secondary-color);
+font-family: var(--font-family);
+}
+
+
+
+
+/* Container fills entire viewport */
+.chat-container {
+display: flex;
+flex-direction: column;
+height: 100%;
+width: 100%;
+}
+
+
+
+
+/* Header at top */
+.chat-header {
+background-color: var(--primary-color);
+color: #FFFFFF;
+padding: 1rem;
+text-align: center;
+font-weight: 600;
+font-size: 1.25rem;
+flex: 0 0 auto;
+display: flex;            /* puts the <img> and <h1> on one line            */
+  align-items: center;      /* vertically centres them                        */
+  justify-content: center;  /* centres the whole block in the header bar      */
+  gap: 0.75rem;     
+
+}
+.chat-header img {
+  height: 40px;             /* whatever height you like                       */
+  width: auto;              /* preserves the aspect-ratio                     */
+}
+
+
+
+
+/* Message area grows and scrolls */
+.chat-window {
+flex: 1 1 auto;
+padding: 1rem;
+overflow-y: auto;
+background-color: var(--bot-bg);
+}
+
+
+
+
+/* Individual bubbles */
+.message {
+max-width: 80%;
+margin-bottom: 0.75rem;
+padding: 0.75rem 1rem;
+border-radius: 12px;
+line-height: 1.4;
+word-break: break-word;
+margin-left: 0;
+margin-right: 0;
+}
+
+
+
+
+/* Bot on the left */
+.message.bot {
+background-color: var(--bot-bg);
+border: 1px solid #E0E0E0;
+margin-right: auto;
+}
+
+
+
+
+/* User on the right */
+.message.user {
+background-color: var(--user-bg);
+margin-left: auto;
+}
+
+
+
+
+/* Typing indicator animation */
+@keyframes blink {
+0% { opacity: 0.2; }
+20% { opacity: 1; }
+100% { opacity: 0.2; }
+}
+
+
+
+
+/* Typing indicator bubble */
+.message.typing {
+display: flex;
+align-self: flex-start;
+background-color: var(--bot-bg);
+border: 1px solid #E0E0E0;
+}
+
+
+
+
+.message.typing .dot {
+background-color: #999;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+margin: 0 2px;
+animation: blink 1.4s infinite both;
+}
+
+
+
+
+.message.typing .dot:nth-child(1) { animation-delay: 0s; }
+.message.typing .dot:nth-child(2) { animation-delay: 0.2s; }
+.message.typing .dot:nth-child(3) { animation-delay: 0.4s; }
+
+
+
+
+/* Input bar “stuck” to bottom */
+.chat-input {
+flex: 0 0 auto;
+display: flex;
+border-top: 1px solid #DDD;
+padding: 0.5rem;
+background-color: var(--bot-bg);
+}
+
+
+
+
+.chat-input textarea {
+flex: 1;
+border: none;
+padding: 0.75rem;
+font-family: var(--font-family);
+font-size: 1rem;
+resize: none;
+outline: none;
+border-radius: 8px;
+margin-right: 0.5rem;
+}
+
+
+
+
+.chat-input button {
+background-color: var(--primary-color);
+color: #FFFFFF;
+border: none;
+padding: 0 1rem;
+cursor: pointer;
+font-size: 1rem;
+font-weight: 500;
+border-radius: 8px;
+transition: background-color 0.2s ease;
+}
+
+
+
+
+.chat-input button:hover {
+background-color: #3A5B80;
+}
+
+
+
