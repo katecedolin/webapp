@@ -52,7 +52,7 @@ async function queryOpenAI(messages, useSearch) {
   return data.choices?.[0]?.message?.content || "";
 }
 
-app.post('/', async (req, res) => {
+app.post('/api/chat', async (req, res) => {
   const { prompt } = req.body;
 
   // Build the base message array
