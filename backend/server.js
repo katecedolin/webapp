@@ -2,7 +2,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const cors = require('cors');
-const serverless = require('serverless-http');
+
 require('dotenv').config();
 
 const app = express();
@@ -84,5 +84,5 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: "Failed to fetch data from Azure OpenAI." });
   }
 });
-
+const serverless = require('serverless-http');
 module.exports.handler = serverless(app);
