@@ -57,7 +57,7 @@
 
 
    try {
-     const res = await fetch("https://cerulean-cuchufli-2473ba.netlify.app/.netlify/functions/server/api/chat", {
+     const res = await fetch("/.netlify/functions/server/api/chat", {
        method: "POST",
        headers: { "Content-Type": "application/json" },
        body: JSON.stringify({ prompt })
