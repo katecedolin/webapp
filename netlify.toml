@@ -1,5 +1,17 @@
 [build]
+  # 1. Your static site lives in the `frontend/` folder
   publish   = "frontend"
+  # 2. Your Lambda handlers live in `netlify/functions/`
   functions = "netlify/functions"
 
+# 3. (Optional) when running `netlify dev`, point it at the same functions dir
+[dev]
+  functions = "netlify/functions"
 
+[[redirects]]
+  # 4. Proxy any client call to /api/* into your Express app
+  from     = "/api/*"
+  to       = "/.netlify/functions/server/api/:splat"
+  status   = 200
+  methods  = ["GET", "POST", "OPTIONS"]
+  force    = true
