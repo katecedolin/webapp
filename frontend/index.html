@@ -57,7 +57,7 @@
 
 
    try {
-     const res = await fetch("/netlify/functions/server/", {
+     const res = await fetch(".netlify/functions/server", {
        method: "POST",
        headers: { "Content-Type": "application/json" },
        body: JSON.stringify({ prompt })
